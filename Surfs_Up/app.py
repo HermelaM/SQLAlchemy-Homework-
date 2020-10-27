@@ -1,6 +1,7 @@
+import pandas as pd
+import numpy as np
 import datetime as dt
 import numpy as np
-import pandas as pd
 
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -9,10 +10,8 @@ from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify
 
-
-#################################################
 # Database Setup
-#################################################
+
 engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 
 # reflect an existing database into a new model
@@ -24,20 +23,16 @@ Base.prepare(engine, reflect=True)
 Measurement = Base.classes.measurement
 Station = Base.classes.station
 
-#################################################
 # Flask Setup
-#################################################
+
 app = Flask(__name__)
 
-
-#################################################
 # Flask Routes
-#################################################
 
 @app.route("/")
 def welcome():
     return (
-        f"Welcome to the Hawaii Climate Analysis API!<br/>"
+        
         f"Available Routes:<br/>"
         f"<a href='/api/v1.0/precipitation'>api/v1.0/precipitation</a><br/>"
         f"<a href='/api/v1.0/stations'>api/v1.0/stations</a><br/>"
